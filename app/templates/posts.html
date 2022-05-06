@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% for post in posts %}
+    <div class="card post" style="width: 100rem;">
+      <div class="card-body">
+        <h2 style="text-align: center;" class="card-title post_title">{{ post.title }}</h2>
+        <h5 class="card-subtitle mb-2 text-muted"> >> Anonymus </h5>
+        <p class="card-text">{{ post.content }}</p>
+        <a href="{{ '/post/' + post.id|string }}" class="card-link">Ссылка на пост</a>
+      </div>
+    </div>
+{% endfor %}
+{% endblock %}
