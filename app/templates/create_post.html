@@ -9,10 +9,14 @@
         <form method="POST">
             {% for x in form %}
                 <div class="form-group">
-                    {% if x.label() != 'submit' %}
+                    {% if x.name != 'submit' %}
                         {{ x.label() }}
                     {% endif %}
-                    {{ x() }}
+		    {% if x.name == "body" %}
+                    {{ x(style="width: 400px; height: 500px;") }}
+		    {% else %}
+		    {{ x() }}
+		    {% endif %}
                 </div>
             {% endfor %}
         </form>

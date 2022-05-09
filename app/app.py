@@ -20,6 +20,15 @@ def get_posts(s):
     if not s:
         return
     all_posts = s.query(Posts).all()
+    result = []
+    for post in all_posts:
+        if post.author:
+            user = s.query(User).filter(post.author == User.id).first()
+            result.append(post)
+            if user:
+                result[-1].author = user.name
+        else:
+            result.append(post)
     return all_posts
 
 
@@ -38,6 +47,7 @@ def get_post(s, id):
 
 
 app = Flask(__name__)
+#  login_manager.init_app(app)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 app.register_blueprint(posts, url_prefix='/blog')
 db_session.global_init("db/blogs.sqlite")
